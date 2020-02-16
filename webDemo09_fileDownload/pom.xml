@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.my.webDemo09_fileDownload</groupId>
+    <artifactId>webDemo09_fileDownload</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+<dependencies>
+    <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+    <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.12</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+    <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>1.4</version>
+    </dependency>
+
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20190722</version>
+        </dependency>
+
+
+
+        <!--    &lt;!&ndash; https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload &ndash;&gt;-->
+<!--    <dependency>-->
+<!--        <groupId>commons-fileupload</groupId>-->
+<!--        <artifactId>commons-fileupload</artifactId>-->
+<!--        <version>1.2.1</version>-->
+<!--    </dependency>-->
+</dependencies>
+
+    <!-- 解决IDEA中导入新的maven依赖后Language Level自动重置问题 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.12</source>
+                    <target>1.12</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

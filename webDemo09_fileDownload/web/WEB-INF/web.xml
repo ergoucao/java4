@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+        <servlet>
+            <servlet-name>upload</servlet-name>
+            <servlet-class>com.my.servlet.file.upload.Fileupload</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>upload</servlet-name>
+            <url-pattern>/upload</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>download</servlet-name>
+            <servlet-class>com.my.servlet.file.download.FileDownload</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>download</servlet-name>
+            <url-pattern>/download</url-pattern>
+        </servlet-mapping>
+
+<!--   考核发布页面-->
+        <servlet>
+            <servlet-name>manager</servlet-name>
+            <servlet-class>com.my.servlet.ManagerServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>manager</servlet-name>
+            <url-pattern>/manager</url-pattern>
+        </servlet-mapping>
+
+        <servlet>
+            <servlet-name>method</servlet-name>
+            <servlet-class>com.my.servlet.LoginServlet</servlet-class>
+        </servlet>
+    
+        <servlet-mapping>
+            <servlet-name>method</servlet-name>
+            <url-pattern>/method</url-pattern>
+        </servlet-mapping>
+
+<!--    过滤器设置请求编码，响应编码，过滤字符预防xss攻击-->
+        <filter>
+            <filter-name>myfilter</filter-name>
+            <filter-class>com.my.filter.FilterServlet</filter-class>
+        </filter>
+        <filter-mapping>
+            <filter-name>myfilter</filter-name>
+            <url-pattern>/*</url-pattern>
+        </filter-mapping>
+
+</web-app>
