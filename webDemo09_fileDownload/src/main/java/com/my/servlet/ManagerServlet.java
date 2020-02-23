@@ -4,7 +4,9 @@ import com.my.pojo.Notice;
 import com.my.pojo.Student;
 import com.my.pojo.User;
 import com.my.service.GiveTestNoticeService;
+import com.my.service.LoginService;
 import com.my.service.imp.FileServiceImpl;
+import com.my.service.imp.LoginServiceImpl;
 import com.my.service.imp.ManagerServiceImpl;
 import org.apache.commons.io.output.ClosedOutputStream;
 import org.apache.log4j.Logger;
@@ -12,9 +14,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
 
@@ -152,10 +152,41 @@ public class ManagerServlet extends HttpServlet
         else if (oper.equals("useSession"))//后台页面使用session实现欢迎您。
         {
             logger.debug("userSession开始执行");
+            if(req.getCookies()==null)
+            {
+                resp.getWriter().write("未登录");
+                return;
+            }
             User user=(User) req.getSession().getAttribute("user");
             JSONObject jsonObject=new JSONObject(user);
             logger.debug(jsonObject);
-            resp.getWriter().write(String.valueOf(jsonObject.get("uname")));
+            String flag=useCookie(req,resp);
+//            if (flag==null)
+//            {
+//                resp.getWriter().write("未登录");
+//                return;
+//            }
+//            if (user.getUname().equals(""))
+//            {
+//                resp.sendRedirect("/webDemo09_fileDownload_Web_exploded/Backstage.html");
+//            }
+//            else
+//            {
+                resp.getWriter().write(String.valueOf(jsonObject.get("uname")));
+//            }
+        }
+        else if (oper.equals("session"))
+        {
+//            logger.debug("userSession开始执行");|
+//            String flag=useCookie(req,resp);
+//
+//            else
+//            {
+//                User user=(User) req.getSession().getAttribute("user");
+//                JSONObject jsonObject=new JSONObject(user);
+//                logger.debug(jsonObject);
+//                resp.getWriter().write(String.valueOf(jsonObject.get("uname")));
+//            }
         }
         else
         {
@@ -177,6 +208,7 @@ public class ManagerServlet extends HttpServlet
         notice.settContent(req.getParameter("tContent"));
         notice.setDeadline(req.getParameter("time"));
         notice.setTest(req.getParameter("test"));
+        notice.setPeriod(req.getParameter("time"));
 //        调用service层方法
         logger.debug(" 调用service层方法");
         GiveTestNoticeService gtns=new ManagerServiceImpl();
@@ -346,5 +378,50 @@ public class ManagerServlet extends HttpServlet
             error=deleteWork(String.valueOf(js.get("code")));
         }
         return error;
+    }
+
+    private String useCookie(HttpServletRequest req, HttpServletResponse resp)
+    {
+        Cookie[] cks = req.getCookies();
+        String adid=null;
+        String adname=null;
+
+        if (cks != null)
+        {
+            String uid="";
+            for (Cookie c:cks)
+            {
+                if ("uid".equals(c.getName()))
+                {
+                    uid=c.getValue();
+                }
+            }
+            if (!("".equals(uid)))
+            {
+                //校验uid用户信息。
+                LoginService ls=new LoginServiceImpl();
+                User u=ls.checkLoginService(uid);
+                if (u!=null)
+                {
+                    //将用户对象存入session 创建session对象
+                    HttpSession hs=req.getSession();
+                    hs.setAttribute("user",u);
+                    logger.debug("session（cookie）:"+u);
+
+                    //cookie检验成功。
+                    adid=u.getPwd();
+                    adname=u.getUname();
+                }
+            }
+        }
+        JSONObject js=new JSONObject();
+        js.put("adid",adid);
+        js.put("adname",adname);
+        logger.debug(js);
+        if (adname==null)
+        {
+            return null;
+        }
+        return String.valueOf(js);
     }
 }

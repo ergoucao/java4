@@ -1,14 +1,9 @@
 package com.my.service.imp;
 
-import com.my.dao.ChangeTestNotice;
 import com.my.dao.impl.LoginDao;
 import com.my.pojo.Notice;
-import com.my.pojo.Student;
 import com.my.service.*;
-import com.my.servlet.LoginServlet;
 import org.apache.log4j.Logger;
-
-import java.util.Calendar;
 
 public class ManagerServiceImpl implements GiveTestNoticeService, GetWorkDetailsService, GetTestDetailsService, ChangeTestNoticeService, ChangeWorkPassService,DeleteWorkService
 {
@@ -17,6 +12,11 @@ public class ManagerServiceImpl implements GiveTestNoticeService, GetWorkDetails
     public Notice giveTestNotice(Notice notice)
     {
         LoginDao ld=new LoginDao();
+        String flag=getTestNoticeByTestService(notice.getTest());
+        if (flag!=null)
+        {
+            return null;
+        }
         return ld.giveTestNoticeDao(notice);
     }
 

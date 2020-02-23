@@ -42,14 +42,14 @@
             <url-pattern>/method</url-pattern>
         </servlet-mapping>
 
-<!--    过滤器设置请求编码，响应编码，过滤字符预防xss攻击-->
-        <filter>
-            <filter-name>myfilter</filter-name>
-            <filter-class>com.my.filter.FilterServlet</filter-class>
-        </filter>
-        <filter-mapping>
-            <filter-name>myfilter</filter-name>
-            <url-pattern>/*</url-pattern>
-        </filter-mapping>
+<!--&lt;!&ndash;    过滤器设置请求编码，响应编码，过滤字符预防xss攻击&ndash;&gt;-->
+<!--        <filter>-->
+<!--            <filter-name>myfilter</filter-name>-->
+<!--            <filter-class>com.my.filter.FilterServlet</filter-class>-->
+<!--        </filter>-->
+<!--        <filter-mapping>-->
+<!--            <filter-name>myfilter</filter-name>-->
+<!--            <url-pattern>/*</url-pattern>-->
+<!--        </filter-mapping>-->
 
 </web-app>

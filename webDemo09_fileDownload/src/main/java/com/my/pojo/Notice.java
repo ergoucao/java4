@@ -39,7 +39,6 @@ public class Notice
         this.period = period;
         setDeadline(period);
     }
-
     public String getTest()
     {
         return test;
@@ -82,14 +81,18 @@ public class Notice
 
     public String gettDeadline()
     {
-        if (tDeadline ==null)
+        System.out.println("测试："+tDeadline);
+        if (tDeadline==null)
         {
+            System.out.println("进入if");
             Date date=new Date();
             SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             tDeadline =sdf.format(date);
         }
+        System.out.println("测试："+tDeadline);
         return tDeadline;
     }
+
 
     //输入时间间隔进行deadline的设置。
     public void setDeadline(String time)
@@ -102,8 +105,11 @@ public class Notice
 
     public void settDeadline(String time)
     {
+        System.out.println(time);
+        tDeadline =new String();
         tDeadline=time;
     }
+
 
     @Override
     public String toString()

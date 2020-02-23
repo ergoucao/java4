@@ -231,8 +231,9 @@ public class LoginDao implements ChangeTestNotice, ChangeTable, GetFilePath, Get
     {
         logger.debug("开始执行giveTestNoticeDao方法 ");
 //        创建sql语句
-        String sql = "INSERT INTO t_test VALUE(DEFAULT,?,?,?,?);";
-
+        String sql = "INSERT INTO t_test VALUE(DEFAULT,?,?,?,?,?,?);";
+        String state=notice.getState()!=null?notice.getState():"0";
+        String period=notice.getPeriod();
         try
         {
             conn = JdbcUtils.getConnection();
@@ -245,7 +246,10 @@ public class LoginDao implements ChangeTestNotice, ChangeTable, GetFilePath, Get
             ps.setString(3, notice.gettDeadline());
             logger.debug("开始执行sql方法4");
             ps.setString(4, notice.getTest());
-            logger.debug("开始执行sql方法5");
+            logger.debug("开始执行sql方法5:"+notice.getTest());
+            ps.setString(5,state);
+            ps.setString(6,period);
+
             int num = ps.executeUpdate();
             if (num > 0)
             {
@@ -387,8 +391,8 @@ public class LoginDao implements ChangeTestNotice, ChangeTable, GetFilePath, Get
                     s[i]=new Notice();
                     logger.debug("数据库查询提取中1");
                     s[i].setTest(rs.getString("test"));
-                    logger.debug("数据库查询提取中2"+rs.getString("tDeadline"));
-                    s[i].settDeadline(rs.getString("tDeadline"));
+                    logger.debug("数据库查询提取中2");
+                    s[i].setPeriod(rs.getString("period"));
                     logger.debug("数据库查询提取中3");
                     s[i].settContent(rs.getString("tcontent"));
                     logger.debug("数据库查询提取中4");
@@ -396,12 +400,12 @@ public class LoginDao implements ChangeTestNotice, ChangeTable, GetFilePath, Get
                     logger.debug("数据库查询提取中5:");
                     s[i].settId(rs.getString("tid"));
                     logger.debug("数据库查询提取中6");
-                    s[i].setPeriod(rs.getString("period"));
+                    s[i].settDeadline(rs.getString("tDeadline"));
                     logger.debug("数据库查询提取中7");
                     s[i].setState(rs.getString("state"));
+                    logger.debug("数据提取中("+i+")："+s[i].toString());
                     i++;
                 }
-                logger.debug("数据提取中("+i+")："+s[i]);
             }
         } catch (SQLException e)
         {
@@ -424,7 +428,7 @@ public class LoginDao implements ChangeTestNotice, ChangeTable, GetFilePath, Get
         out.put(jsCAPages);
         for (int K=0;K<i&&K<n;K++)
         {
-            logger.debug("outAsJSon+"+s[K]);
+            logger.debug("outAsJSon+"+s[K].toString());
             JSONObject temp=new JSONObject(s[K].toString());
             logger.debug(String.valueOf(temp));
             out.put(temp);
