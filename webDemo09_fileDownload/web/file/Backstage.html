@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Backstage.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="../js/Backstage.js"></script>
+    <title>作业提交系统-后台</title>
+</head>
+<body>
+    <div class="page">
+        <div class="head">
+            <h1>
+                <span>作业提交系统-后台</span>
+                <i class="icon ion-android-options"></i>
+                <span class="nav disappear">
+                    <span>考核发布</span>
+                    <span>考核列表</span>
+                </span>
+            </h1>
+            <h3>欢迎您，UID221801113</h3>
+        </div>
+
+        <div class="cttBackground">
+            <div class="checkListContent">
+                <div class="cttHead">
+                    <div>
+                        <i class="icon ion-ios-shuffle-strong"></i>
+                        <span>考核列表</span>  
+                    </div>
+                    <div></div>
+                </div>
+                <div class="checkList">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>考核码</th>
+                                <th>考核题目</th>
+                                <th>考核概述</th>
+                                <th>考核状态</th>
+                                <th>发布人/截止日期</th>
+                                <th>工具栏</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0001</th>
+                                <td>第一次考核</td>
+                                <td>上传HTML页面</td>
+                                <td class="khStatus">
+                                    <span class="notFinishStatus">未结束</span>
+                                    <span class="khOver">点击结束</span>
+                                </td>
+                                <td>张三</td>
+                                <td class="khTool">
+                                    <span><i class="icon ion-ios-search-strong"></i></span>
+                                    <span><i class="icon ion-ios-close-outline"></i></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>001</td>
+                                <td>第一次考核</td>
+                                <td>上传HTML页面</td>
+                                <td>
+                                    <span class="finishStatus">已结束</span>
+                                    <span class="khOver">点击结束</span>
+                                </td>
+                                <td>张三</td>
+                                <td class="khTool">
+                                    <span><i class="icon ion-ios-search-strong"></i></span>
+                                    <span><i class="icon ion-ios-close-outline"></i></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="checkDetailContent disappear">
+                <div class="cttHead">
+                    <div>
+                        <i class="icon ion-ios-shuffle-strong"></i>
+                        <span>考核详情</span>  
+                    </div>
+                    <div></div>
+                </div>
+                <div class="checkDetail">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td><label for="khTitle">考核题目：</label></td>
+                                <td><input type="text" id="tName" placeholder="请设置考核题目"></td>
+                            </tr>
+                            <tr>
+                                <td valign="top"><label for="khDetail">考核内容：</label></td>
+                                <td><textarea style="resize: none" id="tContent" cols="10" rows="10" placeholder="请设置考核内容"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td><label for="khDeadline">时限：</label></td>
+                                <td><input type="text" id="time" placeholder="请设置考核时限，如：14，即考核持续2周"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="checkPublishContent disappear">
+                <div class="cttHead">
+                    <div>
+                        <i class="icon ion-ios-shuffle-strong"></i>
+                        <span>考核发布</span>  
+                    </div>
+                    <div></div>
+                </div>
+                <div class="checkPublish">
+                    <form action="giveNotice">
+
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td><label for="test">考核码：</label></td>
+                                    <td><input type="text" id="test" placeholder="请设置考核码"></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="tName">考核题目：</label></td>
+                                    <td><input type="text" id="tName" placeholder="请设置考核题目"></td>
+                                </tr>
+                                <tr>
+                                    <td valign="top"><label for="tContent">考核内容：</label></td>
+                                    <td><textarea style="resize: none" id="tContent" cols="10" rows="10" placeholder="请设置考核内容"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><label for="time">时限：</label></td>
+                                    <td><input type="text" id="time" placeholder="请设置考核时限，如：14，即考核持续2周"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div><input type="button" value="发布"></input>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
